@@ -15,9 +15,8 @@ pipeline{
             }
             post{
                 success{
-                    echo "======== Build successfull! ========"
-                    mailto: "mick.wiedermann@gmail.com",
-                    subject: "Bulid was Succesfull!",
+                    mail to: "mick.wiedermann@gmail.com",
+                    subject: "Bulid was Successful!",
                     body: "Add some interesting details here..."
                 }
                 failure{
@@ -31,7 +30,7 @@ pipeline{
                 echo " Performing Unit Tests..."
                 echo " Performing Functional Tests..."
                 echo " Performing System Tests..."
-                echo " Performing Intergration Tests..."
+                echo " Performing Integration Tests..."
             }
             post{
                 success{
