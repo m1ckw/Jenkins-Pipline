@@ -1,0 +1,108 @@
+pipeline{
+    agent any
+    environment {
+        DIRECTORY_PATH= "/Users/michaelwiedermann/DEV/sit223_prof_prac/week05_exercise"
+        UNIT_TESTING_FRAMEWORK= "JUnit."
+        TESTING_ENVIRONMENT= "MacDaddy Pro."
+        PRODUCTION_ENVIRONMENT= "Mick Wiedermann."
+    }
+    stages{
+        stage("Build"){
+            steps{
+                echo "======== Executing Build Phase ========"
+                echo "Fetching the source code from the directory: $DIRECTORY_PATH"
+                echo "Compiling the code and generating any necessary artifacts..."
+            }
+            post{
+                success{
+                    echo "======== Build successfull! ========"
+                    mailto: "mick.wiedermann@gmail.com",
+                    subject: "Bulid was Succesfull!",
+                    body: "Add some interesting details here..."
+                }
+                failure{
+                    echo "======== Build failed :( ========"
+                }
+            }
+        }
+        stage("Test"){
+            steps{
+                echo "======== Executing Test Phase with $UNIT_TESTING_FRAMEWORK ========"
+                echo " Performing Unit Tests..."
+                echo " Performing Functional Tests..."
+                echo " Performing System Tests..."
+                echo " Performing Intergration Tests..."
+            }
+            post{
+                success{
+                    echo "======== Tests passed successfully! ========"
+                }
+                failure{
+                    echo "======== Tests failed :( ========"
+                }
+            }
+        }
+        stage("Code Quality Check"){
+            steps{
+                echo "======== Executing Quality Check ========"
+                echo "Checking code quality..."
+            }
+            post{
+                success{
+                    echo "======== Quality checks passed successfully! ========"
+                }
+                failure{
+                    echo "======== Quality checks failed :( ========"
+                }
+            }
+        }
+        stage("Deploy"){
+            steps{
+                echo "======== Executing Test Deployment Phase ========"
+                echo "Deploying to the test environment $TESTING_ENVIRONMENT"
+            }
+            post{
+                success{
+                    echo "======== Test Deployment successfully========"
+                }
+                failure{
+                    echo "======== Test Deployment failed :( ========"
+                }
+            }
+        }
+        stage("Approval"){
+            steps{
+                echo "======== Executing Approval Phase ========"
+                echo "Analysing..."
+                sleep 10
+            }
+            post{
+                success{
+                    echo "======== Approval Given ========"
+                }
+                failure{
+                    echo "======== Approval Denied ========"
+                }
+            }
+        }
+        stage("Deploy to Production"){
+            steps{
+                echo "======== Deploying to Production ========"
+                echo "Deployed to $PRODUCTION_ENVIRONMENT"
+            }
+            post{
+                success{
+                    echo "======== Successfully Deployed to Production! ========"
+                }
+                failure{
+                    echo "======== Production deployment failed :( ========"
+                }
+            }
+        }
+    }
+    post{
+        always{
+            echo "======== Pipeline Executed ========"
+        }
+    }
+}
