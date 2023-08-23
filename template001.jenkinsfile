@@ -20,7 +20,9 @@ pipeline{
                     body: "Add some interesting details here..."
                 }
                 failure{
-                    echo "======== Build failed :( ========"
+                    mail to: "mick.wiedermann@gmail.com",
+                    subject: "Bulid was Successful!",
+                    body: "Add some interesting details here..."
                 }
             }
         }
