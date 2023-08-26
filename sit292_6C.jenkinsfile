@@ -39,7 +39,6 @@ pipeline{
                 echo " Performing Unit Tests..."
                 echo " Performing Functional Tests..."
                 echo " Performing System Tests..."
-                echo " Performing Integration Tests..."
             }
             post{
                 success{
