@@ -12,13 +12,13 @@ pipeline{
                 echo "======== Executing Build Phase ========"
                 echo "Fetching the source code from the directory: $DIRECTORY_PATH"
                 echo "Building Frontend..."
-                nodejs('NodeJS-20.0.0') {
-                    sh 'yarn install'
-                }
+                // nodejs('NodeJS-20.0.0') {
+                //     sh 'yarn install'
+                // }
                 echo "Building Backend..."
-                withGradle() {
-                    sh './gradlew -v'
-                }
+                // withGradle() {
+                //     sh './gradle -v'
+                // }
             }
             post{
                 success{
@@ -28,7 +28,7 @@ pipeline{
                 }
                 failure{
                     mail to: "mick.wiedermann@gmail.com",
-                    subject: "Bulid was Failed!",
+                    subject: "Bulid Failed!",
                     body: "Add some interesting details here..."
                 }
             }
