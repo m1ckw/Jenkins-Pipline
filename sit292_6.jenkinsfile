@@ -21,7 +21,7 @@ pipeline{
                 }
                 failure{
                     mail to: "mick.wiedermann@gmail.com",
-                    subject: "Bulid Failed!",
+                    subject: "Build Failed!",
                     body: "Add some interesting details here..."
                 }
             }
