@@ -24,7 +24,7 @@ pipeline{
                 }
                 failure{
                     emailext attachLog: true,
-                        mail to: "mick.wiedermann@gmail.com",
+                        to: "mick.wiedermann@gmail.com",
                         subject: "Bulid Failed!",
                         body: "\nThe build has failed, check the attached log to troubleshoot the problem."
                 }
