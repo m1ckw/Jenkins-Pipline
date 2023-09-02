@@ -4,12 +4,15 @@ pipeline{
         DIRECTORY_PATH= "/Users/michaelwiedermann/DEV/sit223_prof_prac/Task6.2C"
         FRONTEND_PACKAGE_MANAGER= "Yarn."
         BUILD_AUTOMATION= "Gradle."
-        UNIT_TESTING_FRAMEWORK= "JUnit."
-        TESTING_ENVIRONMENT= "MacDaddy Pro."
-        PRODUCTION_ENVIRONMENT= "Mick Wiedermann."
+        UNIT_TESTING= "JUnit."
+        INTEGRATION_TESTING= "Jasmine."
+        CODE_ANALYSIS= "SonarQube."
+        SECURITY_SCAN= "Veracode."
+        STAGING_ENVIRONMENT= "AWS EC2 Staging Instance."
+        PRODUCTION_ENVIRONMENT= "AWS EC2 Production Server."
     }
     stages{
-        stage("Build"){
+        stage("1: Build"){
             steps{
                 echo "======== Executing Build Phase ========"
                 echo "Fetching the source code from the directory: $DIRECTORY_PATH"
@@ -30,83 +33,126 @@ pipeline{
                 }
             }
         }
-        stage("Test"){
+        stage("2: Unit & Intergration Tests"){
             steps{
-                echo "======== Executing Test Phase with $UNIT_TESTING_FRAMEWORK ========"
-                echo " Performing Unit Tests..."
-                echo " Performing Functional Tests..."
-                echo " Performing System Tests..."
+                echo "======== Executing Test Phase ========"
+                echo " Performing Unit Tests with $UNIT_TESTING"
+                echo " Performing Intergration Tests with $INTEGRATION_TESTING"
             }
             post{
                 success{
-                    echo "======== Tests passed successfully! ========"
+                    mail to: "mick.wiedermann@gmail.com",
+                    subject: "Unit & Intergration Tests Passed!",
+                    body: "\nThe application has successfuly passed the Unit & Intergration Tests."
                 }
                 failure{
-                    echo "======== Tests failed :( ========"
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Unit & Intergration Tests Failed!",
+                        body: "\nThe build has failed the Unit & Intergration Tests. Check the attached log to troubleshoot the problem."
                 }
             }
         }
-        stage("Code Quality Check"){
+        stage("3: Code Analysis"){
             steps{
-                echo "======== Executing Quality Check ========"
-                echo "Checking code quality..."
+                echo "======== Executing Code Analysis ========"
+                echo "Conducting code analysis with $CODE_ANALYSIS"
             }
             post{
                 success{
-                    echo "======== Quality checks passed successfully! ========"
+                    mail to: "mick.wiedermann@gmail.com",
+                    subject: "Code Analysis Passed!",
+                    body: "\nThe application has passed the Code Analysis..."
                 }
                 failure{
-                    echo "======== Quality checks failed :( ========"
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Code Analysis Failed!",
+                        body: "\nThe application has failed the Code Analysis, check the attached log to troubleshoot the problem."
                 }
             }
         }
-        stage("Deploy"){
+        stage("4: Security Scan"){
             steps{
-                echo "======== Executing Test Deployment Phase ========"
-                echo "Deploying to the test environment $TESTING_ENVIRONMENT"
+                echo "======== Executing Security Scan ========"
+                echo "Running a Security Scan with $SECURITY_SCAN"
             }
             post{
                 success{
-                    echo "======== Test Deployment successfully========"
+                    mail to: "mick.wiedermann@gmail.com",
+                    subject: "Security Scan Successful!",
+                    body: "\nThe application has passed the Security Scan..."
                 }
                 failure{
-                    echo "======== Test Deployment failed :( ========"
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Security Scan Failed!",
+                        body: "\nThe Security Scan has failed, check the attached log to troubleshoot the problem."
                 }
             }
         }
-        stage("Approval"){
+        stage("5: Deploy to Staging"){
             steps{
-                echo "======== Executing Approval Phase ========"
-                echo "Analysing..."
-                sleep 10
+                echo "======== Deploying to the Staging Environment ========"
+                echo "Deploying to the staging environment $STAGING_ENVIRONMENT"
             }
             post{
                 success{
-                    echo "======== Approval Given ========"
+                    mail to: "mick.wiedermann@gmail.com",
+                    subject: "Successfully Deployed to Staging!",
+                    body: "\nThe application has been successfully deployed to the satging environemnt..."
                 }
                 failure{
-                    echo "======== Approval Denied ========"
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Deployment to Staging Failed!",
+                        body: "\nThe deployment to staging has failed, check the attached log to troubleshoot the problem."
                 }
             }
         }
-        stage("Deploy to Production"){
+        stage("6: Intergration Tests in Staging"){
+            steps{
+                echo "======== Executing Intergration Tests on Staging ========"
+                echo "Performing Intergration Tests with $INTEGRATION_TESTING in the staging environment"
+            }
+            post{
+                success{
+                    mail to: "mick.wiedermann@gmail.com",
+                    subject: "Intergration Tests on Staging Passed!",
+                    body: "\nThe application has successfully passed the Intergration Tests in the Staging environment..."
+                }
+                failure{
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Intergration Tests in Staging Failed!",
+                        body: "\nThe Intergration Tests in Staging have failed, check the attached log to troubleshoot the problem."
+                }
+            }
+        }
+        stage("7: Deploy to Production"){
             steps{
                 echo "======== Deploying to Production ========"
                 echo "Deployed to $PRODUCTION_ENVIRONMENT"
             }
             post{
                 success{
-                    echo "======== Successfully Deployed to Production! ========"
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Deployment to Production Successful!",
+                        body: "\nThe application has been Deployed to Production! Congrats!"
                 }
                 failure{
-                    echo "======== Production deployment failed :( ========"
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Deployment to Prod Failed!",
+                        body: "\nThe Deployment to production has failed, check the attached log to troubleshoot the problem."
                 }
             }
         }
     }
     post{
         always{
-            echo "======== Pipeline Executed ========"
+            echo "======== Pipeline Executed Succsessfully========"
         }
     }
 }
