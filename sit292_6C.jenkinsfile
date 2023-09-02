@@ -12,7 +12,7 @@ pipeline{
         PRODUCTION_ENVIRONMENT= "AWS EC2 Production Server."
     }
     stages{
-        stage("1: Build"){
+        stage("1:Build"){
             steps{
                 echo "======== Executing Build Phase ========"
                 echo "Fetching the source code from the directory: $DIRECTORY_PATH"
@@ -21,14 +21,14 @@ pipeline{
             }
             post{
                 success{
-                    echo "The application build has been successful...",
+                    echo "The application build has been successful..."
                 }
                 failure{
                     echo "The build has failed, check the log to troubleshoot the problem."
                 }
             }
         }
-        stage("2: Unit & Intergration Tests"){
+        stage("2:Unit & Intergration Tests"){
             steps{
                 echo "======== Executing Test Phase ========"
                 echo " Performing Unit Tests with $UNIT_TESTING"
@@ -49,7 +49,7 @@ pipeline{
                 }
             }
         }
-        stage("3: Code Analysis"){
+        stage("3:Code Analysis"){
             steps{
                 echo "======== Executing Code Analysis ========"
                 echo "Conducting code analysis with $CODE_ANALYSIS"
@@ -63,7 +63,7 @@ pipeline{
                 }
             }
         }
-        stage("4: Security Scan"){
+        stage("4:Security Scan"){
             steps{
                 echo "======== Executing Security Scan ========"
                 echo "Running a Security Scan with $SECURITY_SCAN"
@@ -83,7 +83,7 @@ pipeline{
                 }
             }
         }
-        stage("5: Deploy to Staging"){
+        stage("5:Deploy to Staging"){
             steps{
                 echo "======== Deploying to the Staging Environment ========"
                 echo "Deploying to the staging environment $STAGING_ENVIRONMENT"
@@ -97,7 +97,7 @@ pipeline{
                 }
             }
         }
-        stage("6: Intergration Tests in Staging"){
+        stage("6:Intergration Tests in Staging"){
             steps{
                 echo "======== Executing Intergration Tests on Staging ========"
                 echo "Performing Intergration Tests with $INTEGRATION_TESTING in the staging environment"
@@ -111,7 +111,7 @@ pipeline{
                 }
             }
         }
-        stage("7: Deploy to Production"){
+        stage("7:Deploy to Production"){
             steps{
                 echo "======== Deploying to Production ========"
                 echo "Deployed to $PRODUCTION_ENVIRONMENT"
