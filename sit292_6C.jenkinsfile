@@ -36,7 +36,7 @@ pipeline{
             }
             post{
                 success{
-                    emailext attachLog: true, attachmentsPattern: '**/emailLog.txt',
+                    emailext attachLog: true, // attachmentsPattern: '**/emailLog.txt',
                         to: "mick.wiedermann@gmail.com",
                         subject: "Unit & Intergration Tests Passed!",
                         body: "\nThe application has successfuly passed the Unit & Intergration Tests."
