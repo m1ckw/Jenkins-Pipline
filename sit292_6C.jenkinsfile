@@ -118,7 +118,7 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "mick.wiedermann@gmail.com",
+                    emailext to: "mick.wiedermann@gmail.com",
                     subject: "Deployment to Production Successful!",
                     body: "\nThe application has been Deployed to Production! Congrats!"
                 }
