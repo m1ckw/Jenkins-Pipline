@@ -56,7 +56,7 @@ pipeline{
             }
             post{
                 success{
-                    echo: "The application has passed the Code Analysis..."
+                    echo "The application has passed the Code Analysis..."
                 }
                 failure{
                     echo "The application has failed the Code Analysis, check the log to troubleshoot the problem."
