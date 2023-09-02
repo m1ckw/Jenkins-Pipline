@@ -118,12 +118,12 @@ pipeline{
             }
             post{
                 success{
-                    emai to: "mick.wiedermann@gmail.com",
+                    email to: "mick.wiedermann@gmail.com",
                     subject: "Deployment to Production Successful!",
                     body: "\nThe application has been Deployed to Production! Congrats!"
                 }
                 failure{
-                    emai to: "mick.wiedermann@gmail.com",
+                    email to: "mick.wiedermann@gmail.com",
                     subject: "Deployment to Prod Failed!",
                     body: "\nThe Deployment to production has failed, check the attached log to troubleshoot the problem."
                 }
