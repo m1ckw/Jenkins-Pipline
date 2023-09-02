@@ -21,16 +21,10 @@ pipeline{
             }
             post{
                 success{
-                    emailext attachLog: true, attachmentsPattern: 'generatedFile.txt',
-                        subject: "Bulid Successful!",
-                        body: "\nThe application build has been successful...",
-                        to: "mick.wiedermann@gmail.com"
+                    echo "The application build has been successful...",
                 }
                 failure{
-                    emailext attachLog: true,
-                        to: "mick.wiedermann@gmail.com",
-                        subject: "Bulid Failed!",
-                        body: "\nThe build has failed, check the attached log to troubleshoot the problem."
+                    echo "The build has failed, check the log to troubleshoot the problem."
                 }
             }
         }
@@ -42,7 +36,7 @@ pipeline{
             }
             post{
                 success{
-                    emailext attachLog: true,
+                    emailext attachLog: true, attachmentsPattern: 'emailLog.txt',
                         to: "mick.wiedermann@gmail.com",
                         subject: "Unit & Intergration Tests Passed!",
                         body: "\nThe application has successfuly passed the Unit & Intergration Tests."
@@ -62,16 +56,10 @@ pipeline{
             }
             post{
                 success{
-                    emailext attachLog: true,
-                        to: "mick.wiedermann@gmail.com",
-                        subject: "Code Analysis Passed!",
-                        body: "\nThe application has passed the Code Analysis..."
+                    echo: "The application has passed the Code Analysis..."
                 }
                 failure{
-                    emailext attachLog: true,
-                        to: "mick.wiedermann@gmail.com",
-                        subject: "Code Analysis Failed!",
-                        body: "\nThe application has failed the Code Analysis, check the attached log to troubleshoot the problem."
+                    echo "The application has failed the Code Analysis, check the log to troubleshoot the problem."
                 }
             }
         }
@@ -102,16 +90,10 @@ pipeline{
             }
             post{
                 success{
-                    emailext attachLog: true,
-                        to: "mick.wiedermann@gmail.com",
-                        subject: "Successfully Deployed to Staging!",
-                        body: "\nThe application has been successfully deployed to the staging environemnt..."
+                    echo "The application has been successfully deployed to the staging environemnt..."
                 }
                 failure{
-                    emailext attachLog: true,
-                        to: "mick.wiedermann@gmail.com",
-                        subject: "Deployment to Staging Failed!",
-                        body: "\nThe deployment to staging has failed, check the attached log to troubleshoot the problem."
+                    echo "The deployment to staging has failed, check the log to troubleshoot the problem."
                 }
             }
         }
@@ -122,16 +104,10 @@ pipeline{
             }
             post{
                 success{
-                    emailext attachLog: true,
-                        to: "mick.wiedermann@gmail.com",
-                        subject: "Intergration Tests on Staging Passed!",
-                        body: "\nThe application has successfully passed the Intergration Tests in the Staging environment..."
+                    echo "The application has successfully passed the Intergration Tests in the Staging environment..."
                 }
                 failure{
-                    emailext attachLog: true,
-                        to: "mick.wiedermann@gmail.com",
-                        subject: "Intergration Tests in Staging Failed!",
-                        body: "\nThe Intergration Tests in Staging have failed, check the attached log to troubleshoot the problem."
+                    echo "The Intergration Tests in Staging have failed, check the log to troubleshoot the problem."
                 }
             }
         }
@@ -142,16 +118,14 @@ pipeline{
             }
             post{
                 success{
-                    emailext attachLog: true,
-                        to: "mick.wiedermann@gmail.com",
-                        subject: "Deployment to Production Successful!",
-                        body: "\nThe application has been Deployed to Production! Congrats!"
+                    emai to: "mick.wiedermann@gmail.com",
+                    subject: "Deployment to Production Successful!",
+                    body: "\nThe application has been Deployed to Production! Congrats!"
                 }
                 failure{
-                    emailext attachLog: true,
-                        to: "mick.wiedermann@gmail.com",
-                        subject: "Deployment to Prod Failed!",
-                        body: "\nThe Deployment to production has failed, check the attached log to troubleshoot the problem."
+                    emai to: "mick.wiedermann@gmail.com",
+                    subject: "Deployment to Prod Failed!",
+                    body: "\nThe Deployment to production has failed, check the attached log to troubleshoot the problem."
                 }
             }
         }
