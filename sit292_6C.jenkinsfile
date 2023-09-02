@@ -21,7 +21,7 @@ pipeline{
             }
             post{
                 success{
-                    emailext attachLog: true,
+                    emailext attachLog: true, attachmentsPattern: 'generatedFile.txt',
                         subject: "Bulid Successful!",
                         body: "\nThe application build has been successful...",
                         to: "mick.wiedermann@gmail.com"
@@ -105,7 +105,7 @@ pipeline{
                     emailext attachLog: true,
                         to: "mick.wiedermann@gmail.com",
                         subject: "Successfully Deployed to Staging!",
-                        body: "\nThe application has been successfully deployed to the satging environemnt..."
+                        body: "\nThe application has been successfully deployed to the staging environemnt..."
                 }
                 failure{
                     emailext attachLog: true,
