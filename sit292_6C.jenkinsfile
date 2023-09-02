@@ -21,9 +21,10 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "mick.wiedermann@gmail.com",
-                    subject: "Bulid Successful!",
-                    body: "\nThe application build has been successful..."
+                    emailext attachLog: true,
+                        subject: "Bulid Successful!",
+                        body: "\nThe application build has been successful...",
+                        to: "mick.wiedermann@gmail.com"
                 }
                 failure{
                     emailext attachLog: true,
@@ -41,9 +42,10 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "mick.wiedermann@gmail.com",
-                    subject: "Unit & Intergration Tests Passed!",
-                    body: "\nThe application has successfuly passed the Unit & Intergration Tests."
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Unit & Intergration Tests Passed!",
+                        body: "\nThe application has successfuly passed the Unit & Intergration Tests."
                 }
                 failure{
                     emailext attachLog: true,
@@ -60,9 +62,10 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "mick.wiedermann@gmail.com",
-                    subject: "Code Analysis Passed!",
-                    body: "\nThe application has passed the Code Analysis..."
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Code Analysis Passed!",
+                        body: "\nThe application has passed the Code Analysis..."
                 }
                 failure{
                     emailext attachLog: true,
@@ -79,9 +82,10 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "mick.wiedermann@gmail.com",
-                    subject: "Security Scan Successful!",
-                    body: "\nThe application has passed the Security Scan..."
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Security Scan Successful!",
+                        body: "\nThe application has passed the Security Scan..."
                 }
                 failure{
                     emailext attachLog: true,
@@ -98,9 +102,10 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "mick.wiedermann@gmail.com",
-                    subject: "Successfully Deployed to Staging!",
-                    body: "\nThe application has been successfully deployed to the satging environemnt..."
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Successfully Deployed to Staging!",
+                        body: "\nThe application has been successfully deployed to the satging environemnt..."
                 }
                 failure{
                     emailext attachLog: true,
@@ -117,9 +122,10 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "mick.wiedermann@gmail.com",
-                    subject: "Intergration Tests on Staging Passed!",
-                    body: "\nThe application has successfully passed the Intergration Tests in the Staging environment..."
+                    emailext attachLog: true,
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Intergration Tests on Staging Passed!",
+                        body: "\nThe application has successfully passed the Intergration Tests in the Staging environment..."
                 }
                 failure{
                     emailext attachLog: true,
