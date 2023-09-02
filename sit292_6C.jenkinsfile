@@ -1,7 +1,9 @@
 pipeline{
     agent any
     environment {
-        DIRECTORY_PATH= "/Users/michaelwiedermann/DEV/sit223_prof_prac/week05_exercise"
+        DIRECTORY_PATH= "/Users/michaelwiedermann/DEV/sit223_prof_prac/Task6.2C"
+        FRONTEND_PACKAGE_MANAGER= "Yarn."
+        BUILD_AUTOMATION= "Gradle."
         UNIT_TESTING_FRAMEWORK= "JUnit."
         TESTING_ENVIRONMENT= "MacDaddy Pro."
         PRODUCTION_ENVIRONMENT= "Mick Wiedermann."
@@ -11,25 +13,20 @@ pipeline{
             steps{
                 echo "======== Executing Build Phase ========"
                 echo "Fetching the source code from the directory: $DIRECTORY_PATH"
-                echo "Building Frontend..."
-                // nodejs('NodeJS-20.0.0') {
-                //     sh 'yarn install'
-                // }
-                echo "Building Backend..."
-                // withGradle() {
-                //     sh './gradle -v'
-                // }
+                echo "Running the Frontend Package Manager $FRONTEND_PACKAGE_MANAGER"
+                echo "Building the project with $BUILD_AUTOMATION"
             }
             post{
                 success{
                     mail to: "mick.wiedermann@gmail.com",
-                    subject: "Bulid was Successful!",
-                    body: "Add some interesting details here..."
+                    subject: "Bulid Successful!",
+                    body: "\nThe application build has been successful..."
                 }
                 failure{
-                    mail to: "mick.wiedermann@gmail.com",
-                    subject: "Bulid Failed!",
-                    body: "Add some interesting details here..."
+                    emailext attachLog: true,
+                        mail to: "mick.wiedermann@gmail.com",
+                        subject: "Bulid Failed!",
+                        body: "\nThe build has failed, check the attached log to troubleshoot the problem."
                 }
             }
         }
