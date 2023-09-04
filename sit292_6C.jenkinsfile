@@ -71,8 +71,8 @@ pipeline{
             post{
                 success{
                     emailext 
-                        subject: "Security Scan Successful!",
                         body: "\nThe application has passed the Security Scan...",
+                        subject: "Security Scan Successful!",
                         to: "mick.wiedermann@gmail.com"
                 }
                 failure{
