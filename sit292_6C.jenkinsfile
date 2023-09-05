@@ -118,14 +118,16 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "mick.wiedermann@gmail.com",
-                    subject: "Deployment to Production Successful!",
-                    body: "\nThe application has been Deployed to Production! Congrats!"
+                    emailext  attachLog: true,  
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Deployment to Production Successful!",
+                        body: "\nThe application has been Deployed to Production! Congrats!"
                 }
                 failure{
-                    mail to: "mick.wiedermann@gmail.com",
-                    subject: "Deployment to Prod Failed!",
-                    body: "\nThe Deployment to production has failed, check the attached log to troubleshoot the problem."
+                    emailext  attachLog: true, 
+                        to: "mick.wiedermann@gmail.com",
+                        subject: "Deployment to Prod Failed!",
+                        body: "\nThe Deployment to production has failed, check the attached log to troubleshoot the problem."
                 }
             }
         }
